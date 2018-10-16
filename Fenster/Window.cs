@@ -54,7 +54,7 @@ namespace Fenster
             background.resize(In);
         }
 
-        //public void AddOr
+        //public void AddAnd
 
         private List<Rectangle> simplifyAddIn(List<Rectangle> In, Rectangle newRectangle)
         {
@@ -88,14 +88,10 @@ namespace Fenster
             }
             else
             {
-                // Case1, the last rectangle is outside of the old list. There is no simplification possible. Add the rectangle.
+                // Case3, the last rectangle is outside of the old list. There is no simplification possible. Add the rectangle.
                 In.Add(newRectangle);
                 return In;
             }
-
-
-
-
         }
         private bool isSubsetOf(List<Rectangle> In, Rectangle newRectangle)
         {
@@ -144,9 +140,7 @@ namespace Fenster
                     return true;
                 }
             }
-
             return false;
-            
         }
     }
 }

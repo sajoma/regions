@@ -23,7 +23,6 @@ namespace Fenster
             {
                 this.invalid = true;
             }
-
         }
         public List<int> getCoord()
         {
@@ -50,7 +49,6 @@ namespace Fenster
         }
         public static bool subset(Rectangle a, Rectangle b)
         {
-
             //Check x-Axis
             if ((a.minX >= b.minX) && (a.maxX <= b.maxX))
             {
