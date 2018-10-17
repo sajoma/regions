@@ -37,12 +37,12 @@ namespace Fenster
                         if (Rectangle.subset(r, s) && !schonGedruckt)
                         {
                             schonGedruckt = true;
-                            Console.Write("o");
+                            Console.Write("r");
                         }
                     }
                     if (!schonGedruckt)
                     {
-                        Console.Write("x");
+                        Console.Write("l");
                     }
                 }
                 Console.WriteLine();
@@ -66,14 +66,18 @@ namespace Fenster
                     In.Add(elemAdd);
                 }
             }
-            
-
-
         }
 
         public void AddOr(Rectangle newRectangle)
         {
             //1) Prüfe auf Kollisionen mit bisherigen Rectangles
+            for (int c = In.Count() - 1; c >= 0; c--)
+            {
+                if(Rectangle.subset(In[c], newRectangle))
+                {
+                    In.RemoveAt(c);
+                }
+            }
             this.CutOrIn(In, newRectangle);
             this.In.simplifyByX(In, Math.Max(0, In.Count()-1));
             this.background.resize(In);

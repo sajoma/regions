@@ -25,7 +25,6 @@ namespace Fenster
             //Check case1 of possible insertions: the  rectangle is outside of the old list:
             Rectangle newRect3 = new Rectangle(4, 5, 4, 5);
             w.AddOr(newRect3);
-            w.printWindow();
 
             //Check case2 of possible insertions
             Rectangle newRect4 = new Rectangle(2, 3, 2, 3);
