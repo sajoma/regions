@@ -10,7 +10,7 @@ namespace Fenster
     {
         public Background(int minX, int maxX, int minY, int maxY) :base(minX, maxX, minY, maxY)
         {}
-        public void resize(List<Rectangle> In)
+        public void resize(ListOperations In)
         {
             if (In.Count != 0)
             {

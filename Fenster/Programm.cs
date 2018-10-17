@@ -12,7 +12,7 @@ namespace Fenster
         public static void Main(string[] args)
         {
             Background background = new Background(0, 10, 0, 10);
-            List<Rectangle> In = new List<Rectangle>();
+            ListOperations In = new ListOperations();
             Rectangle newRect1 = new Rectangle(0, 2, 0, 2);
             Rectangle newRect2 = new Rectangle(1, 3, 1, 3);
 
@@ -22,7 +22,7 @@ namespace Fenster
             w.AddOr(newRect2);
 
             //Check case1 of possible insertions: the  rectangle is outside of the old list:
-            Rectangle newRect3 = new Rectangle(4,5,4,5);
+            Rectangle newRect3 = new Rectangle(4, 5, 4, 5);
             w.AddOr(newRect3);
 
             //Check case2 of possible insertions
@@ -32,6 +32,13 @@ namespace Fenster
             //Check case3 of possible insertions: there is a non-emptyintersection with IN
             Rectangle newRect5 = new Rectangle(2, 5, 2, 4);
             w.AddOr(newRect5);
+
+            Rectangle newRect6 = new Rectangle(0, 0, 0, 8);
+            w.AddOr(newRect6);
+
+            Rectangle newRect7 = new Rectangle(0, 0, 7, 10);
+            w.AddOr(newRect7);
+
             w.printWindow();
 
             //Test: Rectangle der Konstruktor. Alle Tests O.k.
@@ -71,7 +78,7 @@ namespace Fenster
             //Rectangle.intersection(a, i11).printRectangle();
 
 
-            // List<Rectangle> c = new List<Rectangle> (new Rectangle[] { a });
+            // ListOperations c = new ListOperations (new Rectangle[] { a });
 
             // Test: Rectangle Subset Alle Tests O.k.
             //Rectangle a = new Rectangle(0, 1, 0, 1);
@@ -88,7 +95,7 @@ namespace Fenster
             // Test Background Konstruktor. Allet Tests O.k.
             //Background a = new Background(0, 1, 0, 2);
             //Rectangle b = new Rectangle(-1, 3, 0, 1);
-            //List<Rectangle> c = new List<Rectangle>(new Rectangle[] { b });
+            //ListOperations c = new ListOperations(new Rectangle[] { b });
             //a.resize(c);
             //a.printRectangle();
 
