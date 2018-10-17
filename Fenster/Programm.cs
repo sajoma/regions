@@ -25,10 +25,10 @@ namespace Fenster
             Rectangle a7 = new Rectangle(-1, 1, 2, 3);
             Rectangle a8 = new Rectangle(-1, 5, 3, 5);
             Rectangle a9 = new Rectangle(3, 5, -1, 5);
-            Rectangle a10 = new Rectangle(-1, 5, 2, 5);
+            Rectangle a10 = new Rectangle(-5,5,0,1);
             Rectangle a11 = new Rectangle(-1, 5, -4, 2);
 
-            ListOperations aList = Rectangle.AddIntoRectangle(basis, a6); // Auch andersrum testen
+            ListOperations aList = Rectangle.AddIntoRectangle(basis, a10); // Auch andersrum testen
 
             Console.WriteLine("to");
 

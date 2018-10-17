@@ -105,7 +105,7 @@ namespace Fenster
                 Rectangle upper = new Rectangle(oldMinX, oldMaxX, oldMaxY, addMaxY);
                 Rectangle lower = new Rectangle(oldMinX, oldMaxX, addMinY, oldMinY);
                 Rectangle left = new Rectangle(addMinX, oldMinX, addMinY, addMaxY);
-                Rectangle right = new Rectangle(oldMinX, addMaxX, addMinY, addMaxY);
+                Rectangle right = new Rectangle(oldMaxX, addMaxX, addMinY, addMaxY);
                 aList.validAdd(upper);
                 aList.validAdd(lower);
                 aList.validAdd(left);
