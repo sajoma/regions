@@ -116,8 +116,21 @@ namespace Fenster
                 aList.validAdd(lower);
                 aList.validAdd(left);
                 aList.Add(add);
+                return aList;
             }
 
+            if ((addMinX < oldMaxX) && (oldMaxX < addMaxX))
+            {
+                Rectangle upper = new Rectangle(addMinX, oldMaxX, oldMaxY, addMaxY);
+                Rectangle lower = new Rectangle(addMinX, oldMaxX, addMinY, oldMinY);
+                Rectangle right = new Rectangle(oldMaxX, addMaxX, addMinY, addMaxY);
+                aList.validAdd(upper);
+                aList.validAdd(lower);
+                aList.validAdd(right);
+                aList.Add(add);
+                return aList;
+            }
+            return aList;
 
         }
         public static bool Equals(Rectangle a, Rectangle b)

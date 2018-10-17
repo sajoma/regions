@@ -101,7 +101,7 @@ namespace Fenster
             {
                 this.Add(add);
             }
-            return aList;
+            return this;
         }
         //See how index can be simplified with other rectangles
         public ListOperations simplifyByX(ListOperations List, int index)
