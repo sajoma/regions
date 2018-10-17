@@ -60,6 +60,21 @@ namespace Fenster
                 return false;
             }
         }
+
+        public static ListOperations AddIntoRectangle(Rectangle old, Rectangle add)
+        {
+            ListOperations aList = new ListOperations();
+            if(subset(old,add))
+            {
+                aList.Add(add);
+                return aList;
+            }
+            if(subset(add, old))
+            {
+                aList.Add(old);
+                return aList;
+            }
+        }
         public static bool Equals(Rectangle a, Rectangle b)
         {
             if (!(a.getCoord().SequenceEqual(b.getCoord())))
