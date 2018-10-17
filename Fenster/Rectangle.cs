@@ -74,6 +74,12 @@ namespace Fenster
                 aList.Add(old);
                 return aList;
             }
+            if((Rectangle.intersection(old,add).getInvalid()))
+            {
+                aList.Add(old);
+                aList.Add(add);
+                return aList;
+            }
 
             int oldMinX = old.getCoord()[0];
             int oldMaxX = old.getCoord()[1];
@@ -87,7 +93,7 @@ namespace Fenster
 
             if ((oldMinX <addMinX) &&  (addMaxX < oldMaxX))
             {
-                Rectangle lower = new Rectangle(addMinX, addMaxX, oldMinY, addMinY);
+                Rectangle lower = new Rectangle(addMinX, addMaxX, addMinY, oldMinY);
                 Rectangle upper = new Rectangle(addMinX, addMaxX, oldMaxY, addMaxY);
                 aList.validAdd(lower);
                 aList.validAdd(upper);
@@ -115,7 +121,7 @@ namespace Fenster
                 aList.validAdd(upper);
                 aList.validAdd(lower);
                 aList.validAdd(left);
-                aList.Add(add);
+                aList.Add(old);
                 return aList;
             }
 
@@ -127,7 +133,7 @@ namespace Fenster
                 aList.validAdd(upper);
                 aList.validAdd(lower);
                 aList.validAdd(right);
-                aList.Add(add);
+                aList.Add(old);
                 return aList;
             }
             return aList;

@@ -12,17 +12,35 @@ namespace Fenster
         public static void Main(string[] args)
         {
             // Teste Funktion: Add Into Rectangle: Hier ohne Windows und resize() und Background
-            //Rectangle basis = new Rectangle(0, 4, 0, 4);
-
-            Background background = new Background(0, 10, 0, 10);
-            ListOperations In = new ListOperations();
-            Rectangle newRect1 = new Rectangle(0, 2, 0, 2);
-            Rectangle newRect2 = new Rectangle(1, 3, 1, 3);
+            Rectangle basis = new Rectangle(0, 4, 0, 4);
 
 
-            Window w = new Window(background, In);
-            w.AddOr(newRect1);
-            w.AddOr(newRect2);
+            // All ways Rectangle can hit:
+            Rectangle a1 = new Rectangle(-10, 10, -10, 10);
+            Rectangle a2 = new Rectangle(10, 10, 10, 10);
+            Rectangle a3 = new Rectangle(-2, 1, -1, 5);
+            Rectangle a4 = new Rectangle(1, 3, 3, 5);
+            Rectangle a5 = new Rectangle(2, 5, 1, 3);
+            Rectangle a6 = new Rectangle(1, 3, -10, 2);
+            Rectangle a7 = new Rectangle(-1, 1, 2, 3);
+            Rectangle a8 = new Rectangle(-1, 5, 3, 5);
+            Rectangle a9 = new Rectangle(3, 5, -1, 5);
+            Rectangle a10 = new Rectangle(-1, 5, 2, 5);
+            Rectangle a11 = new Rectangle(-1, 5, -4, 2);
+
+            ListOperations aList = Rectangle.AddIntoRectangle(basis, a6); // Auch andersrum testen
+
+            Console.WriteLine("to");
+
+            //Background background = new Background(0, 10, 0, 10);
+            //ListOperations In = new ListOperations();
+            //Rectangle newRect1 = new Rectangle(0, 2, 0, 2);
+            //Rectangle newRect2 = new Rectangle(1, 3, 1, 3);
+
+
+            //Window w = new Window(background, In);
+            //w.AddOr(newRect1);
+            //w.AddOr(newRect2);
 
             ////Check case1 of possible insertions: the  rectangle is outside of the old list:
             //Rectangle newRect3 = new Rectangle(4, 5, 4, 5);
@@ -42,25 +60,7 @@ namespace Fenster
             //Rectangle newRect7 = new Rectangle(0, 0, 7, 10);
             //w.AddOr(newRect7);
 
-            w.printWindow();
-
-            //All ways Rectangle can hit:
-            //Rectangle a1 = new Rectangle(-10, 10, -10, 10);
-            //Rectangle a2 = new Rectangle(10,10,10,10);
-            //Rectangle a3 = new Rectangle(-2,1,-1,5);
-            //Rectangle a4 = new Rectangle(1, 3, 3, 5);
-            //Rectangle a5 = new Rectangle(2, 5, 1, 3);
-            //Rectangle a6 = new Rectangle(1, 3, -10,2);
-            //Rectangle a7 = new Rectangle(-1,1,2,3);
-            //Rectangle a8 = new Rectangle(-1, 5, 3, 5);
-            //Rectangle a9 = new Rectangle(3, 5, -1, 5);
-            //Rectangle a10 = new Rectangle(-1, 5, 2, 5);
-            //Rectangle a11 = new Rectangle(-1, 5, -4, 2);
-
-            //ListOperations aList = Rectangle.AddIntoRectangle(basis, a11); // Auch andersrum testen
-
-            //ListOperations.printList(aList);
-
+            //w.printWindow();
 
             //Test: Rectangle der Konstruktor. Alle Tests O.k.
             //Rectangle a = new Rectangle(0, 0, 0, -1);
