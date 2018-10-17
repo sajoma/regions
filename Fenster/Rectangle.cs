@@ -89,9 +89,35 @@ namespace Fenster
             {
                 Rectangle lower = new Rectangle(addMinX, addMaxX, oldMinY, addMinY);
                 Rectangle upper = new Rectangle(addMinX, addMaxX, oldMaxY, addMaxY);
-                aList.validAdd
-                
+                aList.validAdd(lower);
+                aList.validAdd(upper);
+                aList.Add(old);
+                return aList;
             }
+            if ((addMinX < oldMinX) && (oldMaxX < addMaxX))
+            {
+                Rectangle upper = new Rectangle(oldMinX, oldMaxX, oldMaxY, addMaxY);
+                Rectangle lower = new Rectangle(oldMinX, oldMaxX, addMinY, oldMinY);
+                Rectangle left = new Rectangle(addMinX, oldMinX, addMinY, addMaxY);
+                Rectangle right = new Rectangle(oldMinX, addMaxX, addMinY, addMaxY);
+                aList.validAdd(upper);
+                aList.validAdd(lower);
+                aList.validAdd(left);
+                aList.validAdd(right);
+                aList.Add(old);
+                return aList;
+            }
+            if ((oldMinX < addMaxX) && (addMaxX < oldMaxX))
+            {
+                Rectangle upper = new Rectangle(oldMinX, addMaxX, oldMaxY, addMaxY);
+                Rectangle lower = new Rectangle(oldMinX, addMaxX, addMinY, oldMinY);
+                Rectangle left = new Rectangle(addMinX, oldMinX, addMinY, addMaxY);
+                aList.validAdd(upper);
+                aList.validAdd(lower);
+                aList.validAdd(left);
+                aList.Add(add);
+            }
+
 
         }
         public static bool Equals(Rectangle a, Rectangle b)
