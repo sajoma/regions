@@ -95,7 +95,14 @@ namespace Fenster
             return (ctr == (maxX - minX + 1) * (maxY - minY + 1)) ? true : false;
 
         }
-
+        public ListOperations validAdd(Rectangle add)
+        {
+            if (!add.getInvalid())
+            {
+                this.Add(add);
+            }
+            return aList;
+        }
         //See how index can be simplified with other rectangles
         public ListOperations simplifyByX(ListOperations List, int index)
         {

@@ -60,7 +60,7 @@ namespace Fenster
                 return false;
             }
         }
-
+        
         public static ListOperations AddIntoRectangle(Rectangle old, Rectangle add)
         {
             ListOperations aList = new ListOperations();
@@ -74,6 +74,25 @@ namespace Fenster
                 aList.Add(old);
                 return aList;
             }
+
+            int oldMinX = old.getCoord()[0];
+            int oldMaxX = old.getCoord()[1];
+            int oldMinY = old.getCoord()[2];
+            int oldMaxY = old.getCoord()[3];
+
+            int addMinX = add.getCoord()[0];
+            int addMaxX = add.getCoord()[1];
+            int addMinY = add.getCoord()[2];
+            int addMaxY = add.getCoord()[3];
+
+            if ((oldMinX <addMinX) &&  (addMaxX < oldMaxX))
+            {
+                Rectangle lower = new Rectangle(addMinX, addMaxX, oldMinY, addMinY);
+                Rectangle upper = new Rectangle(addMinX, addMaxX, oldMaxY, addMaxY);
+                aList.validAdd
+                
+            }
+
         }
         public static bool Equals(Rectangle a, Rectangle b)
         {
