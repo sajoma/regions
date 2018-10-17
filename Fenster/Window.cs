@@ -54,16 +54,22 @@ namespace Fenster
         {
             ListOperations toBeInserted;
 
-            foreach (Rectangle item in In)
+            if(In.Count() == 0)
             {
-                toBeInserted = Rectangle.AddIntoRectangle(item, newRectangle);
-                foreach(Rectangle elemAdd in toBeInserted)
+                In.Add(newRectangle);
+            }
+            for(int c = In.Count()-1; c>=0; c--)
+            {
+                toBeInserted = Rectangle.AddIntoRectangle(In[c], newRectangle);
+                foreach (Rectangle elemAdd in toBeInserted)
                 {
                     In.Add(elemAdd);
                 }
             }
-        }
+            
 
+
+        }
 
         public void AddOr(Rectangle newRectangle)
         {
