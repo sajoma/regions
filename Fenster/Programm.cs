@@ -40,7 +40,8 @@ namespace Fenster
             Rectangle newRect7 = new Rectangle(0, 0, 7, 10);
             w.AddOr(newRect7);
 
-            
+            w.printWindow();
+
 
 
 

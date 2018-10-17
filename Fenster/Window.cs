@@ -83,6 +83,20 @@ namespace Fenster
             this.background.resize(In);
         }
 
+        public ListOperations addAnd(ListOperations In, Rectangle newRectangle)
+        {
+            ListOperations newIn = new ListOperations();
+            Rectangle a;
+            for (int c = In.Count() - 1; c >= 0; c--)
+            {
+                a = Rectangle.intersection(In[c], newRectangle);
+                this.CutOrIn(newIn, newRectangle);
+            }
+            this.In.simplifyByX(In, Math.Max(0, In.Count() - 1));
+            this.background.resize(In);
+        }
+
+
         //public void AddAnd
 
         
