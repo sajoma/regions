@@ -49,9 +49,26 @@ namespace Fenster
             };
             Console.ReadKey();
         }
+
+        private void CutOrIn(ListOperations In, Rectangle newRectangle)
+        {
+            ListOperations toBeInserted;
+
+            foreach (Rectangle item in In)
+            {
+                toBeInserted = Rectangle.AddIntoRectangle(item, newRectangle);
+                foreach(Rectangle elemAdd in toBeInserted)
+                {
+                    In.Add(elemAdd);
+                }
+            }
+        }
+
+
         public void AddOr(Rectangle newRectangle)
         {
-            this.In.simplifyAddIn(In, newRectangle);
+            //1) Prüfe auf Kollisionen mit bisherigen Rectangles
+            this.CutOrIn(In, newRectangle);
             this.In.simplifyByX(In, Math.Max(0, In.Count()-1));
             this.background.resize(In);
         }
