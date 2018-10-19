@@ -24,6 +24,18 @@ namespace Fenster
                 this.invalid = true;
             }
         }
+        public void setCoord(int minX, int maxX, int minY, int maxY)
+        {
+            this.minX = minX;
+            this.maxX = maxX;
+            this.minY = minY;
+            this.maxY = maxY;
+
+            if ((minX > maxX) || (minY > maxY))
+            {
+                this.invalid = true;
+            }
+        }
         public List<int> getCoord()
         {
             List<int> coordinates = new List<int>(new int[] { this.minX, this.maxX, this.minY, this.maxY });
@@ -35,6 +47,12 @@ namespace Fenster
         }
         public static Rectangle intersection(Rectangle a, Rectangle b)
         {
+            //Falls a oder b invalid gebe einen invalid rectangle zurück
+            if((a.getInvalid() || b.getInvalid()))
+            {
+                Rectangle d = new Rectangle(0, -1, 0, 0);
+                return d;
+            }
             // get intersection x_Axis:
             int minX = Math.Max(a.getCoord()[0], b.getCoord()[0]);
             int maxX = Math.Min(a.getCoord()[1], b.getCoord()[1]);
@@ -60,24 +78,9 @@ namespace Fenster
                 return false;
             }
         }
-        
-        public static ListOperations AddIntoRectangle(Rectangle old, Rectangle add)
+        public static ListOperations AddIntoRectangle(Rectangle old, Rectangle add, bool XOR)
         {
             ListOperations aList = new ListOperations();
-            if(subset(old,add))
-            {
-                aList.Add(add);
-                return aList;
-            }
-            if(subset(add, old))
-            {
-                return aList;
-            }
-            if((Rectangle.intersection(old,add).getInvalid()))
-            {
-                aList.Add(add);
-                return aList;
-            }
 
             int oldMinX = old.getCoord()[0];
             int oldMaxX = old.getCoord()[1];
@@ -89,45 +92,91 @@ namespace Fenster
             int addMinY = add.getCoord()[2];
             int addMaxY = add.getCoord()[3];
 
-            if ((oldMinX <addMinX) &&  (addMaxX < oldMaxX))
+            if (subset(old,add))
             {
-                Rectangle lower = new Rectangle(addMinX, addMaxX, addMinY, oldMinY);
-                Rectangle upper = new Rectangle(addMinX, addMaxX, oldMaxY, addMaxY);
-                aList.validAdd(lower);
-                aList.validAdd(upper);
+                if (XOR)
+                {
+                    Rectangle upper = new Rectangle(oldMinX, oldMaxX, oldMaxY + 1, addMaxY);
+                    Rectangle lower = new Rectangle(oldMinX, oldMaxX, addMinY, oldMinY - 1);
+                    Rectangle left = new Rectangle(addMinX, oldMinX - 1, addMinY, addMaxY);
+                    Rectangle right = new Rectangle(oldMaxX + 1, addMaxX, addMinY, addMaxY);
+                    aList.validAdd(upper, true);
+                    aList.validAdd(lower, true);
+                    aList.validAdd(left, true);
+                    aList.validAdd(right, true);
+                    return aList;
+                }
+                aList.Add(add);
                 return aList;
             }
-            if ((addMinX < oldMinX) && (oldMaxX < addMaxX))
+            if(subset(add, old))
             {
-                Rectangle upper = new Rectangle(oldMinX, oldMaxX, oldMaxY, addMaxY);
-                Rectangle lower = new Rectangle(oldMinX, oldMaxX, addMinY, oldMinY);
-                Rectangle left = new Rectangle(addMinX, oldMinX, addMinY, addMaxY);
-                Rectangle right = new Rectangle(oldMaxX, addMaxX, addMinY, addMaxY);
-                aList.validAdd(upper);
-                aList.validAdd(lower);
-                aList.validAdd(left);
-                aList.validAdd(right);
+                if (XOR)
+                {
+                    Rectangle upper = new Rectangle(oldMinX, oldMaxX, oldMaxY + 1, addMaxY);
+                    Rectangle lower = new Rectangle(oldMinX, oldMaxX, addMinY, oldMinY - 1);
+                    Rectangle left = new Rectangle(addMinX, oldMinX - 1, addMinY, addMaxY);
+                    Rectangle right = new Rectangle(oldMaxX + 1, addMaxX, addMinY, addMaxY);
+                    aList.validAdd(upper, true);
+                    aList.validAdd(lower, true);
+                    aList.validAdd(left, true);
+                    aList.validAdd(right, true);
+                    return aList;
+                }
                 return aList;
             }
-            if ((oldMinX < addMaxX) && (addMaxX < oldMaxX))
+            if((Rectangle.intersection(old,add).getInvalid()))
             {
-                Rectangle upper = new Rectangle(oldMinX, addMaxX, oldMaxY, addMaxY);
-                Rectangle lower = new Rectangle(oldMinX, addMaxX, addMinY, oldMinY);
-                Rectangle left = new Rectangle(addMinX, oldMinX, addMinY, addMaxY);
-                aList.validAdd(upper);
-                aList.validAdd(lower);
-                aList.validAdd(left);
+                aList.Add(add);
                 return aList;
             }
 
-            if ((addMinX < oldMaxX) && (oldMaxX < addMaxX))
+
+            //new Rectangle between old bounds
+            if ((oldMinX <= addMinX) &&  (addMaxX <= oldMaxX))
             {
-                Rectangle upper = new Rectangle(addMinX, oldMaxX, oldMaxY, addMaxY);
-                Rectangle lower = new Rectangle(addMinX, oldMaxX, addMinY, oldMinY);
-                Rectangle right = new Rectangle(oldMaxX, addMaxX, addMinY, addMaxY);
-                aList.validAdd(upper);
-                aList.validAdd(lower);
-                aList.validAdd(right);
+                Rectangle lower = new Rectangle(addMinX, addMaxX, addMinY, oldMinY-1);
+                Rectangle upper = new Rectangle(addMinX, addMaxX, oldMaxY+1, addMaxY);
+                aList.validAdd(lower, true);
+                aList.validAdd(upper, true);
+                return aList;
+            }
+
+            //new Rectangle exceeds old bounds
+            if ((addMinX <= oldMinX) && (oldMaxX <= addMaxX))
+            {
+                Rectangle upper = new Rectangle(oldMinX, oldMaxX, oldMaxY+1, addMaxY);
+                Rectangle lower = new Rectangle(oldMinX, oldMaxX, addMinY, oldMinY-1);
+                Rectangle left = new Rectangle(addMinX, oldMinX-1, addMinY, addMaxY);
+                Rectangle right = new Rectangle(oldMaxX+1, addMaxX, addMinY, addMaxY);
+                aList.validAdd(upper, true);
+                aList.validAdd(lower, true);
+                aList.validAdd(left, true);
+                aList.validAdd(right, true);
+                return aList;
+            }
+
+            //new Rectangle left of old bounds
+            if ((oldMinX <= addMaxX) && (addMaxX <= oldMaxX))
+            {
+                Rectangle upper = new Rectangle(oldMinX, addMaxX, oldMaxY+1, addMaxY);
+                Rectangle lower = new Rectangle(oldMinX, addMaxX, addMinY, oldMinY-1);
+                Rectangle left = new Rectangle(addMinX, oldMinX-1, addMinY, addMaxY);
+                aList.validAdd(upper, true);
+                aList.validAdd(lower, true);
+                aList.validAdd(left, true);
+                return aList;
+            }
+
+            //new Rectangle right of old bounds
+            if ((addMinX <= oldMaxX) && (oldMaxX <= addMaxX))
+            {
+                Rectangle upper = new Rectangle(addMinX, oldMaxX, oldMaxY+1, addMaxY);
+                Rectangle lower = new Rectangle(addMinX, oldMaxX, addMinY, oldMinY-1);
+                Rectangle right = new Rectangle(oldMaxX+1, addMaxX, addMinY, addMaxY);
+                aList.validAdd(upper, true);
+                aList.validAdd(lower, true);
+                aList.validAdd(right, true);
                 return aList;
             }
             return aList;

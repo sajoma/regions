@@ -9,18 +9,11 @@ namespace Fenster
     //Diese Klasse verfügt über Funktionen für das In Array
     public class ListOperations : List<Rectangle>
     {
-        
-        public static bool intersectionWithList(ListOperations rectList, Rectangle intersectWith)
+        public static bool boolListIntersect(ListOperations list, Rectangle intersect)
         {
-            if (rectList.Count() == 0)
+            for (int c = list.Count() - 1; c >= 0; c--)
             {
-                return false;
-            }
-
-            foreach (Rectangle item in rectList)
-            {
-                //If item has a non-empty intersection invalid is false
-                if (!Rectangle.intersection(item, intersectWith).getInvalid())
+                if (!(Rectangle.intersection(list[c], intersect).getInvalid()))
                 {
                     return true;
                 }
@@ -28,15 +21,81 @@ namespace Fenster
             return false;
         }
         
-        public ListOperations validAdd(Rectangle add)
+        //returns \cup_{rectangle in list}(rectanlge \cap intersect)
+        public static ListOperations regionListIntersect(ListOperations rectList, Rectangle intersect)
+        {
+            ListOperations result = new ListOperations();
+            foreach(Rectangle item in rectList)
+            {
+                result.Add(Rectangle.intersection(item, intersect));
+                if (result[result.Count()-1].getInvalid())
+                {
+                    result.RemoveAt(result.Count() - 1);
+                }
+            }
+            return result;
+        }
+
+        public ListOperations validAdd(Rectangle add, bool simplify)
         {
             if (!add.getInvalid())
             {
                 this.Add(add);
             }
+            if (simplify)
+            {
+                this.simplifyByX(this, Math.Max(0, this.Count() - 1));
+                this.simplifyByY(this, Math.Max(0, this.Count() - 1));
+            }
+
             return this;
         }
         //See how index can be simplified with other rectangles
+        public ListOperations simplifyByY(ListOperations List, int index)
+        {
+            for (int i = List.Count() - 1; i >= 0; i--)
+            {
+                if (i != index)
+                {
+                    if ((List[i].getCoord()[2] == List[index].getCoord()[2]) && (List[i].getCoord()[3] == List[index].getCoord()[3]))
+                    {
+                        if (boolListIntersect(List, List[index]) && i != index)
+                        {
+                            int minY = List[i].getCoord()[2];
+                            int maxY = List[i].getCoord()[3];
+
+                            int minXList = List[i].getCoord()[0];
+                            int minXIndex = List[index].getCoord()[0];
+                            int minX = Math.Min(minXList, minXIndex);
+
+                            int maxXList = List[i].getCoord()[1];
+                            int maxXIndex = List[index].getCoord()[1];
+                            int maxX = Math.Max(maxXList, maxXIndex);
+
+                            Rectangle simplified = new Rectangle(minX, maxX, minY, maxY);
+
+                            if (i > index)
+                            {
+                                List.RemoveAt(i);
+                                List.RemoveAt(index);
+                            }
+                            else
+                            {
+                                List.RemoveAt(index);
+                                List.RemoveAt(i);
+                            }
+
+                            List.Insert(Math.Max(0, List.Count()), simplified);
+                            index = Math.Max(0, List.Count() - 1);
+                        }
+                    }
+                }
+
+            }
+
+            return List;
+        }
+
         public ListOperations simplifyByX(ListOperations List, int index)
         {
             for (int i = List.Count() - 1; i >= 0; i--)
@@ -45,7 +104,7 @@ namespace Fenster
                 {
                     if ((List[i].getCoord()[0] == List[index].getCoord()[0]) && (List[i].getCoord()[1] == List[index].getCoord()[1]))
                     {
-                        if (intersectionWithList(List, List[index]) && i != index)
+                        if (boolListIntersect(List, List[index]) && i != index)
                         {
                             int minX = List[i].getCoord()[0];
                             int maxX = List[i].getCoord()[1];
