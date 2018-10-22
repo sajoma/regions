@@ -3,73 +3,67 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Fenster;
 
-namespace Fenster
-{
+
 
     public class Programm
     {
         public static void Main(string[] args)
         {
-
-            //Rectangle newRect1 = new Rectangle(0, 2, 0, 2);
-            //Rectangle newRect2 = new Rectangle(1, 3, 1, 3);
-
-
-            //Window w = new Window();
-            //w.AddOr(newRect1);
-            //w.AddOr(newRect2);
+            Rectangle newRect1 = new Rectangle(0, 2, 0, 2);
+            Rectangle newRect2 = new Rectangle(1, 3, 1, 3);
 
 
-            ////Check case1 of possible insertions: the  rectangle is outside of the old list:
-            //Rectangle newRect3 = new Rectangle(4, 5, 4, 5);
-            //w.AddOr(newRect3);
+            Window w = new Window();
+            w.AddOr(newRect1);
+            w.AddOr(newRect2);
+            
 
-            ////Check case2 of possible insertions
-            //Rectangle newRect4 = new Rectangle(2, 3, 2, 3);
-            //w.AddOr(newRect4);
+        //Check case1 of possible insertions: the  rectangle is outside of the old list:
+            Rectangle newRect3 = new Rectangle(4, 5, 4, 5);
+            w.AddOr(newRect3);
 
-            ////Check case3 of possible insertions: there is a non-emptyintersection with IN
-            //Rectangle newRect5 = new Rectangle(2, 5, 2, 4);
-            //w.AddOr(newRect5);
+            //Check case2 of possible insertions
+            Rectangle newRect4 = new Rectangle(2, 3, 2, 3);
+            w.AddOr(newRect4);
 
-            //Rectangle newRect6 = new Rectangle(0, 0, 0, 8);
-            //w.AddOr(newRect6);
+            //Check case3 of possible insertions: there is a non-emptyintersection with IN
+            Rectangle newRect5 = new Rectangle(2, 5, 2, 4);
+            w.AddOr(newRect5);
 
-            //Rectangle newRect7 = new Rectangle(0, 0, 7, 10);
-            //w.AddOr(newRect7);
+            Rectangle newRect6 = new Rectangle(0, 0, 0, 8);
+            w.AddOr(newRect6);
 
-            //Rectangle newRect8 = new Rectangle(3, 3, 0, 1);
-            //w.AddOr(newRect8);
+            Rectangle newRect7 = new Rectangle(0, 0, 7, 10);
+            w.AddOr(newRect7);
 
-            //w.AddAnd(newRect4);
+            Rectangle newRect8 = new Rectangle(3, 3, 0, 1);
+            w.AddOr(newRect8);
 
-            //w.AddXOR(newRect8);
+            w.AddAnd(newRect4);
 
-            //w.AddXOR(newRect1);
+            w.AddXOR(newRect8);
 
-            //w.AddOr(newRect1);
+            w.AddXOR(newRect1);
 
-            //w.AddOr(newRect2);
+            w.AddOr(newRect1);
 
-            //w.AddXOR(newRect5);
+            w.AddOr(newRect2);
 
-            //w.AddOr(newRect7);
+            w.AddXOR(newRect5);
 
-            //Rectangle newRect9 = new Rectangle(-2, 2, 1, 8);
+            w.AddOr(newRect7);
 
-            //w.AddXOR(newRect9);
+            Rectangle newRect9 = new Rectangle(-2, 2, 1, 8);
 
-            //w.printWindow();
-
-
-
-
-
+            w.AddXOR(newRect9);
+            w.printDebugWindow();
+            w.printWindow();
 
 
-            // Teste Funktion: Add Into Rectangle: Hier ohne Windows und resize() und Background
-            Rectangle basis = new Rectangle(0, 4, 0, 4);
+        // Teste Funktion: Add Into Rectangle: Hier ohne Windows und resize() und Background
+        //Rectangle basis = new Rectangle(0, 4, 0, 4);
 
             // All ways Rectangle can hit:
             //Rectangle a1 = new Rectangle(-10, 10, -10, 10);
@@ -146,4 +140,3 @@ namespace Fenster
 
         }
     }
-}

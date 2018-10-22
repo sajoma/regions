@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{0EE48EDB-43F3-44D4-B49D-6DA6F1958F56}</ProjectGuid>
+    <ProjectGuid>{1D5DEE5F-57C8-4E52-B393-492BF480243B}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Fenster</RootNamespace>
-    <AssemblyName>Fenster</AssemblyName>
+    <RootNamespace>Programm</RootNamespace>
+    <AssemblyName>Programm</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -36,14 +36,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Background.cs" />
-    <Compile Include="ListOperations.cs" />
-    <Compile Include="Programm.cs" />
-    <Compile Include="Rectangle.cs" />
-    <Compile Include="Window.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="System" />
+    <ProjectReference Include="..\Fenster\Fenster.csproj">
+      <Project>{0ee48edb-43f3-44d4-b49d-6da6f1958f56}</Project>
+      <Name>Fenster</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

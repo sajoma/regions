@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace Fenster
 {
-    public class Window
+    public class Window 
     {
         //Um wie weit ist das Fenster zum Ursprung verschoben?
         private Background background;
         private ListOperations In;
 
-        public Window ()
+        public Window() 
         {
             this.background = new Background(0,0,0,0);
             this.In = new ListOperations();
@@ -48,7 +48,14 @@ namespace Fenster
             };
             Console.ReadKey();
         }
-
+        public void printDebugWindow()
+        {
+            foreach(Rectangle item in In)
+            {
+                Console.WriteLine("[" + item.getCoord()[0].ToString() + "," + item.getCoord()[1].ToString() + "]" + "x" + "[" + item.getCoord()[2].ToString() + "," + item.getCoord()[3].ToString() + "]");
+            }
+            Console.ReadKey();
+        }
         public void AddOr(Rectangle newRectangle)
         {
             //1) Prüfe auf Kollisionen mit bisherigen Rectangles
