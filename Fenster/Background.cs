@@ -44,6 +44,13 @@ namespace Fenster
                     }
                 }
             }
+            else
+            {
+                this.minX = 0;
+                this.maxX = 0;
+                this.minY = 0;
+                this.maxY = 0;
+            }
             
         }
 

@@ -52,7 +52,10 @@ namespace Fenster
         {
             foreach(Rectangle item in In)
             {
-                Console.WriteLine("[" + item.getCoord()[0].ToString() + "," + item.getCoord()[1].ToString() + "]" + "x" + "[" + item.getCoord()[2].ToString() + "," + item.getCoord()[3].ToString() + "]");
+                Console.WriteLine("[" + item.getCoord()[0].ToString() + "," 
+                    + item.getCoord()[1].ToString() + "]" 
+                    + "x" 
+                    + "[" + item.getCoord()[2].ToString() + "," + item.getCoord()[3].ToString() + "]");
             }
             Console.ReadKey();
         }
@@ -260,7 +263,15 @@ namespace Fenster
                 In[i].setCoord(minX - offsetX, maxX - offsetX, minY - offsetY, maxY - offsetY);
             }
         }
-
+        
+        public Background getBackgound()
+        {
+            return this.background;
+        }
+        public List<Rectangle> getIn()
+        {
+            return this.In;
+        }
 
     }
 }
