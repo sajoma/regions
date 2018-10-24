@@ -15,34 +15,26 @@ public class Programm
         {
             Fenster.Rectangle newRect1 = new Fenster.Rectangle(0, 2, 0, 2);
             Fenster.Rectangle newRect2 = new Fenster.Rectangle(1, 3, 1, 3);
-
-    
-
+        
             Window w = new Window();
+
             w.AddOr(newRect1);
             w.AddOr(newRect2);
 
-
-        //Check case1 of possible insertions: the  rectangle is outside of the old list:
-        Fenster.Rectangle newRect3 = new Fenster.Rectangle(4, 5, 4, 5);
+            //Check case1 of possible insertions: the  rectangle is outside of the old list:
+            Fenster.Rectangle newRect3 = new Fenster.Rectangle(4, 5, 4, 5);
             w.AddOr(newRect3);
-
 
             //Check case2 of possible insertions
             Fenster.Rectangle newRect4 = new Fenster.Rectangle(2, 3, 2, 3);
             w.AddOr(newRect4);
 
-            
-
             //Check case3 of possible insertions: there is a non-emptyintersection with IN
             Fenster.Rectangle newRect5 = new Fenster.Rectangle(2, 5, 2, 4);
             w.AddOr(newRect5);
 
-            
-
             Fenster.Rectangle newRect6 = new Fenster.Rectangle(0, 0, 0, 8);
             w.AddOr(newRect6);
-
 
 
             Fenster.Rectangle newRect7 = new Fenster.Rectangle(0, 0, 7, 10);
@@ -68,8 +60,7 @@ public class Programm
 
             w.AddOr(newRect7);
 
-        
-        Fenster.Rectangle newRect9 = new Fenster.Rectangle(-2, 2, 1, 8);
+            Fenster.Rectangle newRect9 = new Fenster.Rectangle(-2, 2, 1, 8);
 
             w.AddXOR(newRect9);
         Application.Run(new PrintMedia(w, 100));
