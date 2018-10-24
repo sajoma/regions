@@ -11,8 +11,10 @@ namespace Fenster
     public class PrintMedia : Form
     {
         private Window temp;
-        public PrintMedia(Window w)
+        private int zoomFactor;
+        public PrintMedia(Window w, int zoomFactor)
         {
+            this.zoomFactor=zoomFactor;
             this.temp = w;
             this.Paint += new PaintEventHandler(f1_paint);
         }
@@ -20,28 +22,48 @@ namespace Fenster
         {
             Graphics g = e.Graphics;
 
-            int BcoordPairX = temp.getBackgound().getCoord()[0] + 10;
-            int BcoordPairY = temp.getBackgound().getCoord()[2] + 10;
-            int Bwidth = temp.getBackgound().getCoord()[1] - temp.getBackgound().getCoord()[0];
-            int Bheight = temp.getBackgound().getCoord()[3] - temp.getBackgound().getCoord()[2];
+            //Background
+            int BcoordPairX = temp.getBackgound().getCoord()[0]*zoomFactor +10;
+            int BcoordPairY = temp.getBackgound().getCoord()[2] * zoomFactor +10;
+            int Bwidth = (temp.getBackgound().getCoord()[1] - temp.getBackgound().getCoord()[0]) * zoomFactor;
+            int Bheight = (temp.getBackgound().getCoord()[3] - temp.getBackgound().getCoord()[2]) * zoomFactor;
 
-            g.DrawRectangle(new Pen(Color.Black, 1), (Int32)BcoordPairX , (Int32)BcoordPairY , (Int32)Bwidth , (Int32)Bheight );
+            g.DrawRectangle(new Pen(Color.Black, 1), BcoordPairX , BcoordPairY , Bwidth , Bheight );
+
+            for(int i = BcoordPairX; i<= BcoordPairX + Bwidth; i+=100)
+            {
+                for(int j = BcoordPairY; j <= BcoordPairY+Bheight; j+=100)
+                {
+                    Brush aBrush = Brushes.Olive;
+                    g.FillEllipse(aBrush,i - 5, j - 5, 10, 10);
+                }
+            }
 
             foreach (Rectangle item in temp.getIn())
             {
-                int coordPairX = item.getCoord()[0]+10;
-                int coordPairY = item.getCoord()[2]+10;
-                int width = item.getCoord()[1] - item.getCoord()[0];
-                int height = item.getCoord()[3] - item.getCoord()[2];
-                if(height == 0)
-                {
-                    g.DrawLine(new Pen(Color.Black, 1), coordPairX, coordPairY, (width + item.getCoord()[0] + 10), height+item.getCoord()[2] + 10);
-                }
-                if(width == 0)
-                {
+                int coordPairX = item.getCoord()[0] * zoomFactor+10;
+                int coordPairY = item.getCoord()[2] * zoomFactor+10;
+                int width = (item.getCoord()[1] - item.getCoord()[0]) * zoomFactor;
+                int height = (item.getCoord()[3] - item.getCoord()[2]) * zoomFactor;
 
+                if ((height == 0) && (width !=0))
+                {
+                    g.DrawLine(new Pen(Color.Red, 2), coordPairX, coordPairY, coordPairX+width, coordPairY);
                 }
-                g.DrawRectangle(new Pen(Color.Black, 1),(Int32) coordPairX, (Int32) coordPairY, (Int32) width, (Int32) height);
+                else if ((width == 0) && (height != 0))
+                {
+                    g.DrawLine(new Pen(Color.Red, 2), coordPairX, coordPairY, coordPairX, coordPairY+height);
+                }
+                else if((width == 0)&&(height == 0))
+                {
+                    Brush aBrush = (Brush)Brushes.Red;
+                    g.FillEllipse(aBrush, coordPairX - 5, coordPairY - 5, 10, 10);
+                }
+                else
+                {
+                    g.DrawRectangle(new Pen(Color.Red, 2), coordPairX, coordPairY, width, height);
+                }
+                
             }
         }
     }

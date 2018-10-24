@@ -57,9 +57,10 @@ namespace Fenster
             {
                 if (i != index)
                 {
+                    
                     if ((List[i].getCoord()[2] == List[index].getCoord()[2]) && (List[i].getCoord()[3] == List[index].getCoord()[3]))
                     {
-                        if (boolListIntersect(List, List[index]) && i != index)
+                        if ((Math.Abs(List[i].getCoord()[0] - List[index].getCoord()[1]) == 1) || (Math.Abs(List[i].getCoord()[1] - List[index].getCoord()[0]) == 1))
                         {
                             int minY = List[i].getCoord()[2];
                             int maxY = List[i].getCoord()[3];
@@ -104,7 +105,7 @@ namespace Fenster
                 {
                     if ((List[i].getCoord()[0] == List[index].getCoord()[0]) && (List[i].getCoord()[1] == List[index].getCoord()[1]))
                     {
-                        if (boolListIntersect(List, List[index]) && i != index)
+                        if ((Math.Abs(List[i].getCoord()[2] - List[index].getCoord()[3]) == 1) || (Math.Abs(List[i].getCoord()[3] - List[index].getCoord()[2]) == 1))
                         {
                             int minX = List[i].getCoord()[0];
                             int maxX = List[i].getCoord()[1];

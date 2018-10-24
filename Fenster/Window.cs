@@ -82,23 +82,24 @@ namespace Fenster
                 a = Rectangle.intersection(this.In[c], newRectangle);
                 this.CutOrIn(newIn, newRectangle, true);
             }
-            this.background.resize(newIn);
-            this.In = newIn;
             this.OffsetRegion();
+            this.background.resize(newIn);
+            this.In = newIn;    
         }
 
         public void AddXOR(Rectangle newRectangle)
         {
-            //Step 0) REsize rectangle. Anything outside background does not interest us as it will not be added to In
+
+            //Step 0) Resize rectangle. Anything outside background does not interest us as it will not be added to In
             int backMinX = this.background.getCoord()[0];
             int backMaxX = this.background.getCoord()[1];
             int backMinY = this.background.getCoord()[2];
             int backMaxY = this.background.getCoord()[3];
-            Rectangle back = new Rectangle(backMinX, backMaxX, backMinY, backMaxY);
-            newRectangle = Rectangle.intersection(back, newRectangle);
 
-          
-             if(!newRectangle.getInvalid())
+            Rectangle back = new Rectangle(backMinX, backMaxX, backMinY, backMaxY);
+            Rectangle Rintersect = Rectangle.intersection(back, newRectangle);
+
+             if(!Rintersect.getInvalid())
              {
                 // Step 1) Find Intersection with Rectangles
                 ListOperations intersect = ListOperations.regionListIntersect(this.In, newRectangle);
@@ -109,6 +110,12 @@ namespace Fenster
                 // Step 3) do the offset thing
                 this.OffsetRegion();
              }
+             else
+                {
+                    this.AddOr(newRectangle);
+                }
+
+            this.background.resize(In);
            
         }
 
