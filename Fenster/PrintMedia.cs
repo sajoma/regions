@@ -12,11 +12,17 @@ namespace Fenster
     {
         private Window temp;
         private int zoomFactor;
+
+        public static void Print(Window w)
+        {
+            Application.Run(new PrintMedia(w, 100));
+        }
         public PrintMedia(Window w, int zoomFactor)
         {
             this.zoomFactor=zoomFactor;
             this.temp = w;
             this.Paint += new PaintEventHandler(f1_paint);
+            WindowState = FormWindowState.Maximized;
         }
         private void f1_paint(object sender, PaintEventArgs e)
         {
@@ -30,9 +36,9 @@ namespace Fenster
 
             g.DrawRectangle(new Pen(Color.Black, 1), BcoordPairX , BcoordPairY , Bwidth , Bheight );
 
-            for(int i = BcoordPairX; i<= BcoordPairX + Bwidth; i+=100)
+            for(int i = BcoordPairX; i<= BcoordPairX + Bwidth; i+=zoomFactor)
             {
-                for(int j = BcoordPairY; j <= BcoordPairY+Bheight; j+=100)
+                for(int j = BcoordPairY; j <= BcoordPairY+Bheight; j+=zoomFactor)
                 {
                     Brush aBrush = Brushes.Olive;
                     g.FillEllipse(aBrush,i - 5, j - 5, 10, 10);

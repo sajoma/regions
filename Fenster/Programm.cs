@@ -47,8 +47,6 @@ public class Programm
 
             w.AddXOR(newRect8);
 
-            // Application.Run(new PrintMedia(w, 100));
-
             w.AddXOR(newRect1);
 
              w.AddOr(newRect1);
@@ -63,9 +61,10 @@ public class Programm
             Fenster.Rectangle newRect9 = new Fenster.Rectangle(-2, 2, 1, 8);
 
             w.AddXOR(newRect9);
-        Application.Run(new PrintMedia(w, 100));
-        // w.printDebugWindow();
-        //w.printWindow();
+
+            PrintMedia.Print(w);
+            // w.printDebugWindow();
+            //w.printWindow();
 
 
 
