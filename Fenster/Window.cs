@@ -7,16 +7,34 @@ using System.Threading.Tasks;
 
 namespace Fenster
 {
-    public class Window 
+    public class Window
     {
         //Um wie weit ist das Fenster zum Ursprung verschoben?
+        private int OffsetX;
+        private int OffsetY;
+
         private Background background;
         private ListOperations In;
 
-        public Window() 
+        public Window()
         {
-            this.background = new Background(0,0,0,0);
+            this.background = new Background(0, 0, 0, 0);
             this.In = new ListOperations();
+            this.OffsetX = 0;
+            this.OffsetY = 0;
+        }
+
+        public Window (int OffsetX, int OffsetY)
+        {
+            this.background = new Background(0, 0, 0, 0);
+            this.In = new ListOperations();
+            this.OffsetX = OffsetX;
+            this.OffsetY = OffsetY;
+        }
+
+        public int getOffset(bool xCoord)
+        {
+            return xCoord ? OffsetX : OffsetY;
         }
         public void printWindow()
         {

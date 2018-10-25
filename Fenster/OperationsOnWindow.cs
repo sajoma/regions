@@ -13,6 +13,7 @@ namespace Fenster
             List<Rectangle> addList = add.getIn();
             foreach (Rectangle rect in addList)
             {
+                cancelOffset(rect, old, add);
                 old.AddAnd(rect);
             }
             return catchEmpty(old,add);
@@ -23,9 +24,10 @@ namespace Fenster
             List<Rectangle> addList = add.getIn();
             foreach (Rectangle rect in addList)
             {
+                cancelOffset(rect, old, add);
                 old.AddOr(rect);
             }
-            return catchEmpty(old, add);
+            return old;
         }
 
         public static Window AddXOR(Window old, Window add)
@@ -33,9 +35,10 @@ namespace Fenster
             List<Rectangle> addList = add.getIn();
             foreach (Rectangle rect in addList)
             {
+                cancelOffset(rect, old, add);
                 old.AddXOR(rect);
             }
-            return catchEmpty(old, add);
+            return old;
         }
 
         private static Window catchEmpty(Window old, Window and)
@@ -45,6 +48,11 @@ namespace Fenster
                 old = new Window();
             }
             return old;
+        }
+
+        private static void cancelOffset(Rectangle rect, Window old, Window add)
+        {
+            rect.translateRectangle(add.getOffset(true) - old.getOffset(true), add.getOffset(false) - old.getOffset(false));
         }
     }
 }

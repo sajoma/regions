@@ -29,8 +29,8 @@ namespace Fenster
             Graphics g = e.Graphics;
 
             //Background
-            int BcoordPairX = temp.getBackgound().getCoord()[0]*zoomFactor +10;
-            int BcoordPairY = temp.getBackgound().getCoord()[2] * zoomFactor +10;
+            int BcoordPairX = temp.getBackgound().getCoord()[0]*zoomFactor +10 + temp.getOffset(true);
+            int BcoordPairY = temp.getBackgound().getCoord()[2] * zoomFactor +10+ temp.getOffset(false);
             int Bwidth = (temp.getBackgound().getCoord()[1] - temp.getBackgound().getCoord()[0]) * zoomFactor;
             int Bheight = (temp.getBackgound().getCoord()[3] - temp.getBackgound().getCoord()[2]) * zoomFactor;
 
@@ -47,8 +47,8 @@ namespace Fenster
 
             foreach (Rectangle item in temp.getIn())
             {
-                int coordPairX = item.getCoord()[0] * zoomFactor+10;
-                int coordPairY = item.getCoord()[2] * zoomFactor+10;
+                int coordPairX = item.getCoord()[0] * zoomFactor+10 + temp.getOffset(true);
+                int coordPairY = item.getCoord()[2] * zoomFactor+10 + temp.getOffset(false);
                 int width = (item.getCoord()[1] - item.getCoord()[0]) * zoomFactor;
                 int height = (item.getCoord()[3] - item.getCoord()[2]) * zoomFactor;
 

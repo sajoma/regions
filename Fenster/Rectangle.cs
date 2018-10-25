@@ -198,5 +198,10 @@ namespace Fenster
             Console.WriteLine(this.invalid);
             Console.ReadKey();
         }
+
+        public void translateRectangle(int OffsetX, int OffsetY)
+        {
+            this.setCoord(this.minX + OffsetX, this.maxX + OffsetX, this.minY + OffsetY, this.maxY + OffsetY);
+        }
     }
 }
