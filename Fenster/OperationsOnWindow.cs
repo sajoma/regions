@@ -6,37 +6,37 @@ using System.Threading.Tasks;
 
 namespace Fenster
 {
-    public static class OperationsOnWindow
+    public static class OperationsOnRegion
     {
-        public static Window AddAnd(Window old, Window add)
+        public static Window AndRectRegion(Window old, Window add)
         {
             List<Rectangle> addList = add.getIn();
             foreach (Rectangle rect in addList)
             {
                 cancelOffset(rect, old, add);
-                old.AddAnd(rect);
+                old.AndRectRegion(rect);
             }
             return catchEmpty(old,add);
         }
 
-        public static Window AddOr(Window old, Window add)
+        public static Window OrRectRegion(Window old, Window add)
         {
             List<Rectangle> addList = add.getIn();
             foreach (Rectangle rect in addList)
             {
                 cancelOffset(rect, old, add);
-                old.AddOr(rect);
+                old.OrRectRegion(rect);
             }
             return old;
         }
 
-        public static Window AddXOR(Window old, Window add)
+        public static Window XorRectRegion(Window old, Window add)
         {
             List<Rectangle> addList = add.getIn();
             foreach (Rectangle rect in addList)
             {
                 cancelOffset(rect, old, add);
-                old.AddXOR(rect);
+                old.XorRectRegion(rect);
             }
             return old;
         }

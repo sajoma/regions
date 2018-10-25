@@ -28,7 +28,7 @@ namespace Fenster
         {
             Graphics g = e.Graphics;
 
-            //Background
+            //RegionRectangle
             int BcoordPairX = temp.getBackgound().getCoord()[0]*zoomFactor +10 + temp.getOffset(true);
             int BcoordPairY = temp.getBackgound().getCoord()[2] * zoomFactor +10+ temp.getOffset(false);
             int Bwidth = (temp.getBackgound().getCoord()[1] - temp.getBackgound().getCoord()[0]) * zoomFactor;

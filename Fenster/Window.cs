@@ -13,12 +13,12 @@ namespace Fenster
         private int OffsetX;
         private int OffsetY;
 
-        private Background background;
+        private Region region;
         private ListOperations In;
 
-        public Window()
+        public Window() 
         {
-            this.background = new Background(0, 0, 0, 0);
+            this.region = new Region(0, 0, 0, 0);
             this.In = new ListOperations();
             this.OffsetX = 0;
             this.OffsetY = 0;
@@ -26,7 +26,7 @@ namespace Fenster
 
         public Window (int OffsetX, int OffsetY)
         {
-            this.background = new Background(0, 0, 0, 0);
+            this.region = new Region(0, 0, 0, 0);
             this.In = new ListOperations();
             this.OffsetX = OffsetX;
             this.OffsetY = OffsetY;
@@ -36,12 +36,12 @@ namespace Fenster
         {
             return xCoord ? OffsetX : OffsetY;
         }
-        public void printWindow()
+        public void printRegion()
         {
-            int minX = background.getCoord()[0];
-            int maxX = background.getCoord()[1];
-            int minY = background.getCoord()[2];
-            int maxY = background.getCoord()[3];
+            int minX = region.getCoord()[0];
+            int maxX = region.getCoord()[1];
+            int minY = region.getCoord()[2];
+            int maxY = region.getCoord()[3];
 
             for (int y = minY; y <= maxY; y++)
             {
@@ -66,7 +66,7 @@ namespace Fenster
             };
             Console.ReadKey();
         }
-        public void printDebugWindow()
+        public void printDebugRegion()
         {
             foreach(Rectangle item in In)
             {
@@ -77,7 +77,7 @@ namespace Fenster
             }
             Console.ReadKey();
         }
-        public void AddOr(Rectangle newRectangle)
+        public void OrRectRegion(Rectangle newRectangle)
         {
             //1) Prüfe auf Kollisionen mit bisherigen Rectangles
             for (int c = In.Count() - 1; c >= 0; c--)
@@ -88,10 +88,10 @@ namespace Fenster
                 }
             }
             this.CutOrIn(In, newRectangle, true);
-            this.background.resize(In);
+            this.region.RegionRect(In);
         }
 
-        public void AddAnd(Rectangle newRectangle)
+        public void AndRectRegion(Rectangle newRectangle)
         {
             ListOperations newIn = new ListOperations();
             Rectangle a;
@@ -101,18 +101,18 @@ namespace Fenster
                 this.CutOrIn(newIn, newRectangle, true);
             }
             this.OffsetRegion();
-            this.background.resize(newIn);
+            this.region.RegionRect(newIn);
             this.In = newIn;    
         }
 
-        public void AddXOR(Rectangle newRectangle)
+        public void XorRectRegion(Rectangle newRectangle)
         {
 
-            //Step 0) Resize rectangle. Anything outside background does not interest us as it will not be added to In
-            int backMinX = this.background.getCoord()[0];
-            int backMaxX = this.background.getCoord()[1];
-            int backMinY = this.background.getCoord()[2];
-            int backMaxY = this.background.getCoord()[3];
+            //Step 0) Resize rectangle. Anything outside regionRectangle does not interest us as it will not be added to In
+            int backMinX = this.region.getCoord()[0];
+            int backMaxX = this.region.getCoord()[1];
+            int backMinY = this.region.getCoord()[2];
+            int backMaxY = this.region.getCoord()[3];
 
             Rectangle back = new Rectangle(backMinX, backMaxX, backMinY, backMaxY);
             Rectangle Rintersect = Rectangle.intersection(back, newRectangle);
@@ -130,10 +130,10 @@ namespace Fenster
              }
              else
                 {
-                    this.AddOr(newRectangle);
+                    this.OrRectRegion(newRectangle);
                 }
 
-            this.background.resize(In);
+            this.region.RegionRect(In);
            
         }
 
@@ -289,9 +289,9 @@ namespace Fenster
             }
         }
         
-        public Background getBackgound()
+        public Region getBackgound()
         {
-            return this.background;
+            return this.region;
         }
         public List<Rectangle> getIn()
         {

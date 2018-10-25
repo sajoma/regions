@@ -16,60 +16,60 @@ public class Programm
             Fenster.Rectangle newRect1 = new Fenster.Rectangle(0, 2, 0, 2);
             Fenster.Rectangle newRect2 = new Fenster.Rectangle(1, 3, 1, 3);
         
-            Window w = new Window();
+            Fenster.Window w = new Fenster.Window();
 
-            w.AddOr(newRect1);
-            w.AddOr(newRect2);
+            w.OrRectRegion(newRect1);
+            w.OrRectRegion(newRect2);
 
             //Check case1 of possible insertions: the  rectangle is outside of the old list:
             Fenster.Rectangle newRect3 = new Fenster.Rectangle(4, 5, 4, 5);
-            w.AddOr(newRect3);
+            w.OrRectRegion(newRect3);
 
             //Check case2 of possible insertions
             Fenster.Rectangle newRect4 = new Fenster.Rectangle(2, 3, 2, 3);
-            w.AddOr(newRect4);
+            w.OrRectRegion(newRect4);
 
             //Check case3 of possible insertions: there is a non-emptyintersection with IN
             Fenster.Rectangle newRect5 = new Fenster.Rectangle(2, 5, 2, 4);
-            w.AddOr(newRect5);
+            w.OrRectRegion(newRect5);
 
             Fenster.Rectangle newRect6 = new Fenster.Rectangle(0, 0, 0, 8);
-            w.AddOr(newRect6);
+            w.OrRectRegion(newRect6);
 
 
             Fenster.Rectangle newRect7 = new Fenster.Rectangle(0, 0, 7, 10);
-            w.AddOr(newRect7);
+            w.OrRectRegion(newRect7);
 
             Fenster.Rectangle newRect8 = new Fenster.Rectangle(3, 3, 0, 1);
-            w.AddOr(newRect8);
+            w.OrRectRegion(newRect8);
 
-            w.AddAnd(newRect4);
+            w.AndRectRegion(newRect4);
 
-            w.AddXOR(newRect8);
+            w.XorRectRegion(newRect8);
 
-            w.AddXOR(newRect1);
+            w.XorRectRegion(newRect1);
 
-             w.AddOr(newRect1);
+             w.OrRectRegion(newRect1);
 
-            w.AddOr(newRect2);
+            w.OrRectRegion(newRect2);
 
-            w.AddXOR(newRect5);
+            w.XorRectRegion(newRect5);
 
 
-            w.AddOr(newRect7);
+            w.OrRectRegion(newRect7);
 
             Fenster.Rectangle newRect9 = new Fenster.Rectangle(-2, 2, 1, 8);
 
-            w.AddXOR(newRect9);
+            w.XorRectRegion(newRect9);
 
             PrintMedia.Print(w);
-            // w.printDebugWindow();
-            //w.printWindow();
+            // w.printDebugRegion();
+            //w.printRegion();
 
 
 
 
-        // Teste Funktion: Add Into Fenster.Rectangle: Hier ohne Windows und resize() und Background
+        // Teste Funktion: Add Into Fenster.Rectangle: Hier ohne Regions und RegionRect() und RegionRectangle
         //Fenster.Rectangle basis = new Fenster.Rectangle(0, 4, 0, 4);
 
         // All ways Fenster.Rectangle can hit:
@@ -138,11 +138,11 @@ public class Programm
         //Console.WriteLine(Fenster.Rectangle.Equals(a, b));
         //Console.ReadKey();
 
-        // Test Background Konstruktor. Allet Tests O.k.
-        //Background a = new Background(0, 1, 0, 2);
+        // Test RegionRectangle Konstruktor. Allet Tests O.k.
+        //RegionRectangle a = new RegionRectangle(0, 1, 0, 2);
         //Fenster.Rectangle b = new Fenster.Rectangle(-1, 3, 0, 1);
         //ListOperations c = new ListOperations(new Fenster.Rectangle[] { b });
-        //a.resize(c);
+        //a.RegionRect(c);
         //a.printFenster.Rectangle();
 
     }

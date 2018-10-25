@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Fenster
 {
-    public class Background : Rectangle
+    public class Region : Rectangle
     {
-        public Background(int minX, int maxX, int minY, int maxY) :base(minX, maxX, minY, maxY)
+        public Region(int minX, int maxX, int minY, int maxY) :base(minX, maxX, minY, maxY)
         {}
-        public void resize(ListOperations In)
+        public void RegionRect(ListOperations In)
         {
             if (In.Count != 0)
             {
-                // Our background must at least be as big as that
+                // Our regionRectangle must at least be as big as that
                 this.minX = In[0].getCoord()[0];
                 this.maxX = In[0].getCoord()[1];
                 this.minY = In[0].getCoord()[2];
