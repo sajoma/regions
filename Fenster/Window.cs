@@ -13,12 +13,12 @@ namespace Fenster
         private int OffsetX;
         private int OffsetY;
 
-        private Region region;
+        private Background region;
         private ListOperations In;
 
         public Window() 
         {
-            this.region = new Region(0, 0, 0, 0);
+            this.region = new Background(0, 0, 0, 0);
             this.In = new ListOperations();
             this.OffsetX = 0;
             this.OffsetY = 0;
@@ -26,7 +26,7 @@ namespace Fenster
 
         public Window (int OffsetX, int OffsetY)
         {
-            this.region = new Region(0, 0, 0, 0);
+            this.region = new Background(0, 0, 0, 0);
             this.In = new ListOperations();
             this.OffsetX = OffsetX;
             this.OffsetY = OffsetY;
@@ -289,7 +289,7 @@ namespace Fenster
             }
         }
         
-        public Region getBackgound()
+        public Background getBackgound()
         {
             return this.region;
         }

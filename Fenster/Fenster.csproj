@@ -51,9 +51,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Region.cs" />
+    <Compile Include="Background.cs" />
     <Compile Include="ListOperations.cs" />
-    <Compile Include="OperationsOnWindow.cs" />
     <Compile Include="PrintMedia.cs">
       <SubType>Form</SubType>
     </Compile>

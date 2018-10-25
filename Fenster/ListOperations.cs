@@ -50,12 +50,13 @@ namespace Fenster
 
             return this;
         }
+
         //See how index can be simplified with other rectangles
         public ListOperations simplifyByY(ListOperations List, int index)
         {
             for (int i = List.Count() - 1; i >= 0; i--)
             {
-                if (i != index)
+                if (i != index) //Wir können nicht ein Rectangle mit sich selber zusammenfassen
                 {
                     
                     if ((List[i].getCoord()[2] == List[index].getCoord()[2]) && (List[i].getCoord()[3] == List[index].getCoord()[3]))
@@ -97,11 +98,12 @@ namespace Fenster
             return List;
         }
 
+        //See how index can be simplified with other rectangles
         public ListOperations simplifyByX(ListOperations List, int index)
         {
             for (int i = List.Count() - 1; i >= 0; i--)
             {
-                if (i!= index)
+                if (i!= index) //Wir können nicht ein Rectangle mit sich selber zusammenfassen
                 {
                     if ((List[i].getCoord()[0] == List[index].getCoord()[0]) && (List[i].getCoord()[1] == List[index].getCoord()[1]))
                     {

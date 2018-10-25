@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Fenster
 {
-    public class Region : Rectangle
+    public class Background : Rectangle
     {
-        public Region(int minX, int maxX, int minY, int maxY) :base(minX, maxX, minY, maxY)
+        public Background(int minX, int maxX, int minY, int maxY) :base(minX, maxX, minY, maxY)
         {}
         public void RegionRect(ListOperations In)
         {

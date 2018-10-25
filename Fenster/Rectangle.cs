@@ -18,7 +18,6 @@ namespace Fenster
             this.minY = minY;
             this.maxY = maxY;
 
-            // Is intersection actually empty?
             if ((minX > maxX) || (minY > maxY))
             {
                 this.invalid = true;
@@ -190,6 +189,7 @@ namespace Fenster
             }
             return (a.invalid == b.invalid) ? true : false;
         }
+
         public void printRectangle()
         {
             Console.WriteLine(this.minX.ToString() + this.maxY.ToString() + " ----- " + this.maxX.ToString() + this.minY.ToString());
